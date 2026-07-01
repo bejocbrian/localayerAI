@@ -1,0 +1,28 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import CalendlyWidget from '../components/astro/CalendlyWidget.astro';
+---
+
+<MainLayout
+  title="Schedule a Call"
+  description="Book a free consultation call with Localayer AI. Pick a time that works for you and let's discuss how to grow your business with web development and automation."
+>
+  <section class="section-padding bg-gradient-to-br from-slate-900 to-slate-800">
+    <div class="container">
+      <div class="mx-auto max-w-2xl text-center">
+        <h1 class="heading-lg text-white">Schedule a Free Consultation</h1>
+        <p class="mt-4 text-lg text-slate-300">
+          Pick a time that works for you. Let's discuss how we can help your business grow.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-white">
+    <div class="container">
+      <div class="mx-auto max-w-4xl">
+        <CalendlyWidget />
+      </div>
+    </div>
+  </section>
+</MainLayout>

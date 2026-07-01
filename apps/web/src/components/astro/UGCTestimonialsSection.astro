@@ -1,0 +1,112 @@
+---
+import { Play, Star, Quote } from 'lucide-react';
+
+const UGC_VIDEOS = [
+  {
+    id: 1,
+    name: "Sarah Mitchell",
+    business: "Mitchell Dental",
+    role: "Owner",
+    thumbnail: "/avatars/avatar_accountant.png",
+    videoUrl: "#",
+    quote: "Localayer AI completely transformed our online presence. New patients find us every day now!",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: "James Rodriguez",
+    business: "Rodriguez Plumbing",
+    role: "Owner",
+    thumbnail: "/avatars/avatar_plumber.png",
+    videoUrl: "#",
+    quote: "The automation tools they set up saved us hours every week. Best investment we ever made.",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: "Emily Chen",
+    business: "Serenity Spa",
+    role: "Owner",
+    thumbnail: "/avatars/avatar_spa.png",
+    videoUrl: "#",
+    quote: "Professional, responsive, and they actually care about our success. Highly recommend!",
+    rating: 5,
+  },
+];
+---
+
+<section class="section-padding bg-slate-50">
+  <div class="container">
+    <div class="mx-auto max-w-2xl text-center">
+      <div class="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-4 py-1.5 text-sm font-medium text-teal-700">
+        <Play class="h-4 w-4" />
+        Video Reviews
+      </div>
+      <h2 class="mt-4 heading-md">Hear From Our Clients</h2>
+      <p class="mt-4 text-lg text-slate-600">
+        Real business owners share their experience working with Localayer AI.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-8 md:grid-cols-3">
+      {UGC_VIDEOS.map((video) => (
+        <div class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg">
+          <div class="relative aspect-video overflow-hidden bg-slate-900">
+            <img
+              src={video.thumbnail}
+              alt={`${video.name}, owner of ${video.business}, video testimonial for Localayer AI`}
+              class="h-full w-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity group-hover:bg-black/40">
+              <button
+                class="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-teal-600 shadow-lg transition-all group-hover:scale-110 group-hover:bg-white"
+                aria-label={`Play video from ${video.name}`}
+              >
+                <Play class="h-7 w-7 fill-current" />
+              </button>
+            </div>
+            <div class="absolute bottom-3 left-3 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+              <span class="flex items-center gap-1">
+                <Play class="h-3 w-3 fill-current" />
+                Watch Review
+              </span>
+            </div>
+          </div>
+
+          <div class="p-6">
+            <div class="flex gap-1">
+              {Array.from({ length: video.rating }).map(() => (
+                <Star class="h-4 w-4 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
+
+            <div class="relative mt-4">
+              <Quote class="absolute -left-1 -top-1 h-6 w-6 text-teal-100" />
+              <p class="pl-4 text-sm leading-relaxed text-slate-600">
+                "{video.quote}"
+              </p>
+            </div>
+
+            <div class="mt-5 flex items-center gap-3 border-t border-slate-100 pt-5">
+              <img
+                src={video.thumbnail}
+                alt={`${video.name}, ${video.role} at ${video.business}`}
+                class="h-10 w-10 rounded-full object-cover"
+                loading="lazy"
+              />
+              <div>
+                <div class="text-sm font-semibold text-slate-900">{video.name}</div>
+                <div class="text-xs text-slate-500">{video.role}, {video.business}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center">
+      <p class="text-sm text-slate-500">More client video reviews coming soon</p>
+    </div>
+  </div>
+</section>

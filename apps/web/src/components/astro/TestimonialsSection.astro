@@ -1,0 +1,43 @@
+---
+import { TESTIMONIALS } from '../../config/constants.js';
+import { Star, Quote } from 'lucide-react';
+---
+
+<section class="section-padding bg-white">
+  <div class="container">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="heading-md">Loved by Local Businesses</h2>
+      <p class="mt-4 text-lg text-slate-600">
+        Don't just take our word for it — hear from our clients.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-8 md:grid-cols-3">
+      {TESTIMONIALS.map((testimonial) => (
+        <div class="card relative">
+          <Quote class="absolute right-6 top-6 h-8 w-8 text-teal-100" />
+          <div class="flex gap-1">
+            {Array.from({ length: testimonial.rating }).map(() => (
+              <Star class="h-4 w-4 fill-amber-400 text-amber-400" />
+            ))}
+          </div>
+          <p class="mt-4 text-sm leading-relaxed text-slate-600">
+            "{testimonial.content}"
+          </p>
+          <div class="mt-6 flex items-center gap-3">
+            <img
+              src={testimonial.avatar}
+              alt={`${testimonial.name}, ${testimonial.role} - Localayer AI client testimonial`}
+              class="h-10 w-10 rounded-full object-cover"
+              loading="lazy"
+            />
+            <div>
+              <div class="text-sm font-semibold text-slate-900">{testimonial.name}</div>
+              <div class="text-xs text-slate-500">{testimonial.role}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

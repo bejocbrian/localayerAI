@@ -1,0 +1,61 @@
+---
+import { SERVICES } from '../../config/constants.js';
+import { Globe, Zap, Settings, Bot, MapPin, Share2, Target, Mail, Star, ShoppingCart, Smartphone, Video, Headphones, ArrowRight } from 'lucide-react';
+
+const iconMap = {
+  globe: Globe,
+  zap: Zap,
+  settings: Settings,
+  bot: Bot,
+  mappin: MapPin,
+  share2: Share2,
+  target: Target,
+  mail: Mail,
+  star: Star,
+  shoppingcart: ShoppingCart,
+  smartphone: Smartphone,
+  video: Video,
+  headphones: Headphones,
+};
+---
+
+<section class="section-padding bg-white">
+  <div class="container">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="heading-md">Everything Your Business Needs</h2>
+      <p class="mt-4 text-lg text-slate-600">
+        Comprehensive solutions designed to help local businesses compete with the big players.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {SERVICES.map((service) => {
+        const Icon = iconMap[service.icon] || Globe;
+        return (
+          <div class="card group">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-100 text-teal-600 transition-colors group-hover:bg-teal-600 group-hover:text-white">
+              <Icon class="h-6 w-6" />
+            </div>
+            <h3 class="mt-6 text-lg font-semibold text-slate-900">{service.title}</h3>
+            <p class="mt-1 text-sm font-medium text-teal-600">{service.subtitle}</p>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">{service.description}</p>
+            <ul class="mt-4 space-y-2">
+              {service.features.slice(0, 4).map((feature) => (
+                <li class="flex items-start gap-2 text-sm text-slate-600">
+                  <span class="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500"></span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6 flex items-center justify-between">
+              <span class="text-lg font-bold text-slate-900">{service.price}</span>
+              <a href="/services" class="flex items-center gap-1 text-sm font-medium text-teal-600 transition-colors hover:text-teal-700">
+                Learn more <ArrowRight class="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

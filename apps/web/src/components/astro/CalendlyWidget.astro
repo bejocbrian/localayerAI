@@ -1,0 +1,21 @@
+---
+import { SITE } from '../../config/constants.js';
+---
+
+<div
+  class="calendly-inline-widget"
+  data-url={SITE.caldendlyUrl}
+  style={{ minWidth: '320px', height: '700px' }}
+>
+</div>
+<script is:inline>
+  (function() {
+    if (!document.getElementById('calendly-widget-script')) {
+      var script = document.createElement('script');
+      script.id = 'calendly-widget-script';
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  })();
+</script>

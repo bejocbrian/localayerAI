@@ -1,0 +1,57 @@
+---
+import { SITE, NAV_ITEMS } from '../../config/constants.js';
+import { Mail } from 'lucide-react';
+---
+
+<footer class="border-t border-slate-200 bg-slate-900">
+  <div class="section-padding">
+    <div class="container">
+      <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <a href="/" class="flex items-center gap-2">
+            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600">
+              <span class="text-sm font-bold text-white">L</span>
+            </div>
+            <span class="text-lg font-bold text-white">{SITE.name}</span>
+          </a>
+          <p class="mt-4 text-sm leading-relaxed text-slate-400">
+            {SITE.description}
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-300">Services</h3>
+          <ul class="mt-4 space-y-3">
+            <li><a href="/services" class="text-sm text-slate-400 transition-colors hover:text-white">Web Development</a></li>
+            <li><a href="/services" class="text-sm text-slate-400 transition-colors hover:text-white">Business Automation</a></li>
+            <li><a href="/services" class="text-sm text-slate-400 transition-colors hover:text-white">Tool Setup & Integration</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-300">Company</h3>
+          <ul class="mt-4 space-y-3">
+            {NAV_ITEMS.map((item) => (
+              <li><a href={item.href} class="text-sm text-slate-400 transition-colors hover:text-white">{item.label}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-300">Contact</h3>
+          <ul class="mt-4 space-y-3">
+            <li class="flex items-center gap-2 text-sm text-slate-400">
+              <Mail class="h-4 w-4 text-teal-500" />
+              {SITE.email}
+            </li>
+          </ul>
+          <a href="/schedule" class="btn-primary mt-6 text-sm">Schedule a Call</a>
+        </div>
+      </div>
+
+      <div class="mt-12 border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+        &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,152 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import AiChatbotDemo from '../components/react/demos/AiChatbotDemo.jsx';
+import BookingSystemDemo from '../components/react/demos/BookingSystemDemo.jsx';
+import ReviewEngineDemo from '../components/react/demos/ReviewEngineDemo.jsx';
+import GbpOptimizerDemo from '../components/react/demos/GbpOptimizerDemo.jsx';
+import LeadSpeedRaceDemo from '../components/react/demos/LeadSpeedRaceDemo.jsx';
+import CTASection from '../components/astro/CTASection.astro';
+---
+
+<MainLayout
+  title="Live Demos — See It In Action"
+  description="Try interactive demos of our AI chatbot, booking system, review engine, Google Business Profile optimizer, and lead response automation. See how Localayer AI can transform your local business."
+>
+
+  <section class="section-padding bg-gradient-to-br from-slate-900 to-slate-800">
+    <div class="container">
+      <div class="mx-auto max-w-3xl text-center">
+        <h1 class="heading-lg text-white">See It In Action</h1>
+        <p class="mt-4 text-lg text-slate-300">
+          Don't take our word for it — try these live demos. Each one shows a real solution to a problem local businesses face every day.
+        </p>
+        <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
+          <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Click, interact, and experience what your customers would see
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo 1: AI Chatbot -->
+  <section class="section-padding bg-white">
+    <div class="container">
+      <div class="mx-auto max-w-2xl text-center">
+        <div class="inline-flex items-center gap-2 rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-600">
+          Pain Point: 42-hour average response time
+        </div>
+        <h2 class="mt-4 heading-md">AI Chatbot That Never Sleeps</h2>
+        <p class="mt-3 text-slate-600">
+          23% of businesses never respond to web leads at all. Our AI chatbot answers instantly, qualifies leads, and books calls — 24/7.
+        </p>
+      </div>
+      <div class="mt-10">
+        <AiChatbotDemo client:load />
+      </div>
+      <div class="mt-8 text-center">
+        <p class="text-sm font-medium text-slate-900">This is exactly what would run on YOUR website</p>
+        <a href="/schedule" class="btn-primary mt-3">
+          Get an AI Chatbot for Your Business →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo 2: Booking System -->
+  <section class="section-padding bg-slate-50">
+    <div class="container">
+      <div class="mx-auto max-w-2xl text-center">
+        <div class="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-600">
+          Pain Point: 30% of bookings come after hours
+        </div>
+        <h2 class="mt-4 heading-md">Online Booking That Converts</h2>
+        <p class="mt-3 text-slate-600">
+          Manual scheduling wastes 5+ hours a week and loses customers to competitors who offer instant online booking. Try our system yourself.
+        </p>
+      </div>
+      <div class="mt-10">
+        <BookingSystemDemo client:load />
+      </div>
+      <div class="mt-8 text-center">
+        <p class="text-sm font-medium text-slate-900">Your customers could be booking right now</p>
+        <a href="/schedule" class="btn-primary mt-3">
+          Set Up Online Booking →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo 3: Review Engine -->
+  <section class="section-padding bg-white">
+    <div class="container">
+      <div class="mx-auto max-w-2xl text-center">
+        <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
+          Pain Point: 70% of happy customers never leave a review
+        </div>
+        <h2 class="mt-4 heading-md">Automated Review Requests</h2>
+        <p class="mt-3 text-slate-600">
+          Businesses with 4.5+ stars get 270% more clicks. Our automated SMS system asks every happy customer for a review — and handles the responses.
+        </p>
+      </div>
+      <div class="mt-10">
+        <ReviewEngineDemo client:load />
+      </div>
+      <div class="mt-8 text-center">
+        <p class="text-sm font-medium text-slate-900">Watch your star rating climb month over month</p>
+        <a href="/schedule" class="btn-primary mt-3">
+          Automate Your Reviews →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo 4: GBP Optimizer -->
+  <section class="section-padding bg-slate-50">
+    <div class="container">
+      <div class="mx-auto max-w-2xl text-center">
+        <div class="inline-flex items-center gap-2 rounded-full bg-purple-50 px-3 py-1 text-xs font-semibold text-purple-600">
+          Pain Point: 33M+ businesses have poorly optimized Google profiles
+        </div>
+        <h2 class="mt-4 heading-md">Google Business Profile Optimizer</h2>
+        <p class="mt-3 text-slate-600">
+          Your Google listing is your digital storefront. We optimize photos, posts, reviews, hours, and Q&A to get you to the local 3-pack.
+        </p>
+      </div>
+      <div class="mt-10">
+        <GbpOptimizerDemo client:load />
+      </div>
+      <div class="mt-8 text-center">
+        <p class="text-sm font-medium text-slate-900">Go from invisible to dominant in local search</p>
+        <a href="/schedule" class="btn-primary mt-3">
+          Optimize My Google Profile →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo 5: Lead Speed Race -->
+  <section class="section-padding bg-white">
+    <div class="container">
+      <div class="mx-auto max-w-2xl text-center">
+        <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
+          Pain Point: 78% of customers go with the first responder
+        </div>
+        <h2 class="mt-4 heading-md">Speed-to-Lead: You vs. The Competition</h2>
+        <p class="mt-3 text-slate-600">
+          Every minute you delay a response, a competitor is closing the deal. See what happens with AI-powered instant follow-up vs. manual.
+        </p>
+      </div>
+      <div class="mt-10">
+        <LeadSpeedRaceDemo client:load />
+      </div>
+      <div class="mt-8 text-center">
+        <p class="text-sm font-medium text-slate-900">Stop losing leads to slow response times</p>
+        <a href="/schedule" class="btn-primary mt-3">
+          Get Instant Lead Response →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</MainLayout>

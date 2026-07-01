@@ -1,0 +1,38 @@
+---
+interface Props {
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  tags: string[];
+}
+
+const { title, category, description, image, tags } = Astro.props;
+---
+
+<div class="card group overflow-hidden p-0">
+  <div class="relative overflow-hidden">
+    <img
+      src={image}
+      alt={`${title} - ${category} website by Localayer AI`}
+      class="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+    />
+    <div class="absolute left-3 top-3">
+      <span class="rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-teal-700 backdrop-blur-sm">
+        {category}
+      </span>
+    </div>
+  </div>
+  <div class="p-6">
+    <h3 class="text-lg font-semibold text-slate-900">{title}</h3>
+    <p class="mt-2 text-sm leading-relaxed text-slate-600">{description}</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

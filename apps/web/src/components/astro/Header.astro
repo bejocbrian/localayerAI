@@ -1,0 +1,37 @@
+---
+import { SITE, NAV_ITEMS } from '../../config/constants.js';
+import MobileMenu from '../react/MobileMenu.jsx';
+import { Menu } from 'lucide-react';
+---
+
+<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-lg">
+  <div class="container">
+    <nav class="flex h-16 items-center justify-between">
+      <a href="/" class="flex items-center gap-2">
+        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-600">
+          <span class="text-sm font-bold text-white">L</span>
+        </div>
+        <span class="text-lg font-bold text-slate-900">{SITE.name}</span>
+      </a>
+
+      <div class="hidden items-center gap-1 md:flex">
+        {NAV_ITEMS.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+
+      <div class="hidden items-center gap-3 md:flex">
+        <a href="/schedule" class="btn-primary text-sm">Schedule a Call</a>
+      </div>
+
+      <div class="md:hidden">
+        <MobileMenu client:load />
+      </div>
+    </nav>
+  </div>
+</header>

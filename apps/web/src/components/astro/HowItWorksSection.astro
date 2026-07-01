@@ -1,0 +1,40 @@
+---
+import { STEPS } from '../../config/constants.js';
+import { Phone, FileText, Rocket, HeartHandshake } from 'lucide-react';
+
+const iconMap = {
+  1: Phone,
+  2: FileText,
+  3: Rocket,
+  4: HeartHandshake,
+};
+---
+
+<section class="section-padding bg-slate-50">
+  <div class="container">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="heading-md">How It Works</h2>
+      <p class="mt-4 text-lg text-slate-600">
+        A simple, transparent process from start to finish.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      {STEPS.map((step) => {
+        const Icon = iconMap[step.number] || Phone;
+        return (
+          <div class="relative text-center">
+            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-teal-600 text-white shadow-lg shadow-teal-600/25">
+              <Icon class="h-6 w-6" />
+            </div>
+            <div class="mt-4 text-xs font-bold uppercase tracking-widest text-teal-600">
+              Step {step.number}
+            </div>
+            <h3 class="mt-2 text-lg font-semibold text-slate-900">{step.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{step.description}</p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

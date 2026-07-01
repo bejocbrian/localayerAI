@@ -1,0 +1,30 @@
+{
+  "name": "web",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --port 3000",
+    "build": "astro build",
+    "preview": "astro preview --port 3000",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/partytown": "^2.1.7",
+    "@astrojs/react": "^4.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "astro": "^7.0.3",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.469.0",
+    "pocketbase": "^0.26.9",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5"
+  }
+}

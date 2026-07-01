@@ -1,0 +1,25 @@
+---
+import { Star } from 'lucide-react';
+---
+
+<section class="border-y border-slate-200 bg-slate-50 py-6">
+  <div class="container">
+    <div class="flex flex-wrap items-center justify-center gap-8 text-sm text-slate-500 md:gap-12">
+      <div class="flex items-center gap-1">
+        {Array.from({ length: 5 }).map(() => (
+          <Star class="h-4 w-4 fill-amber-400 text-amber-400" />
+        ))}
+        <span class="ml-2 font-medium text-slate-700">4.9/5</span>
+        <span>from 50+ reviews</span>
+      </div>
+      <div class="hidden h-4 w-px bg-slate-300 md:block"></div>
+      <div>
+        <span class="font-medium text-slate-700">100+</span> businesses transformed
+      </div>
+      <div class="hidden h-4 w-px bg-slate-300 md:block"></div>
+      <div>
+        <span class="font-medium text-slate-700">500+</span> projects delivered
+      </div>
+    </div>
+  </div>
+</section>

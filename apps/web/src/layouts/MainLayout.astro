@@ -1,0 +1,228 @@
+---
+import { SITE, GA_MEASUREMENT_ID } from '../config/constants.js';
+import Header from '../components/astro/Header.astro';
+import Footer from '../components/astro/Footer.astro';
+import CookieBanner from '../components/astro/CookieBanner.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  type?: string;
+}
+
+const { title, description, image, canonical, type = "website" } = Astro.props;
+const pageTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} - ${SITE.tagline}`;
+const pageDescription = description || SITE.description;
+const pageImage = image || '/og-default.png';
+const canonicalUrl = canonical || `${SITE.url}${Astro.url.pathname}`;
+const ogImage = pageImage.startsWith('http') ? pageImage : `${SITE.url}${pageImage}`;
+const isProd = import.meta.env.PROD;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- GA4 Consent Mode v2 Defaults -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function() { window.dataLayer.push(Array.from(arguments)); };
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'granted',
+        'security_storage': 'granted',
+        'wait_for_update': 2000
+      });
+    </script>
+
+    <!-- GA4 via Partytown (production only) -->
+    {isProd && (
+      <>
+        <script type="text/partytown" src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+        <script type="text/partytown" define:vars={{ GA_MEASUREMENT_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(Array.from(arguments));}
+          gtag('js', new Date());
+          gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
+        </script>
+      </>
+    )}
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1" id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <CookieBanner />
+
+    <!-- Scroll Depth Tracking -->
+    <script is:inline>
+      (function() {
+        var tracked = {};
+        var thresholds = [25, 50, 75, 100];
+        function check() {
+          var scrollH = document.documentElement.scrollHeight - window.innerHeight;
+          if (scrollH <= 0) return;
+          var pct = Math.round((window.scrollY / scrollH) * 100);
+          for (var i = 0; i < thresholds.length; i++) {
+            var t = thresholds[i];
+            if (pct >= t && !tracked[t]) {
+              tracked[t] = true;
+              if (typeof window.gtag === 'function') {
+                window.gtag('event', 'scroll_depth', {
+                  event_category: 'engagement',
+                  percent_scrolled: t
+                });
+              }
+            }
+          }
+        }
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            window.requestAnimationFrame(function() {
+              check();
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+      })();
+    </script>
+
+    <!-- Outbound Click Tracking -->
+    <script is:inline>
+      document.addEventListener('click', function(e) {
+        var link = e.target.closest('a');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href) return;
+
+        if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'outbound_click', {
+              event_label: href,
+              event_category: 'navigation',
+              link_url: href
+            });
+          }
+        }
+
+        if (href.startsWith('/schedule') || href.includes('calendly.com')) {
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'calendly_open', {
+              event_label: link.closest('section, header, footer, nav')?.id || 'unknown',
+              event_category: 'conversion'
+            });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<script is:inline type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Localayer AI",
+  "description": "Professional web development, business automation, and AI-powered tools for local businesses. Get enterprise-level technology without the enterprise-level price tag.",
+  "url": "https://www.localayerai.com",
+  "email": "contact@localayerai.com",
+  "logo": "https://www.localayerai.com/favicon.svg",
+  "priceRange": "$$",
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "sameAs": [
+    "https://twitter.com/localayer",
+    "https://linkedin.com/company/localayer",
+    "https://facebook.com/localayer"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Local Business Digital Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Web Development",
+          "description": "Custom-built websites designed to attract more customers and grow your business."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Business Automation",
+          "description": "Automate repetitive tasks and workflows so you can focus on running your business."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "AI Chatbot & Virtual Assistant",
+          "description": "24/7 AI-powered chatbot handles customer inquiries, books appointments, and qualifies leads."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Google Business Profile Optimization",
+          "description": "Optimize your Google Business Profile to appear in local searches and Google Maps."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Paid Ads Management",
+          "description": "Data-driven Google Ads and Meta Ads campaigns that deliver measurable ROI."
+        }
+      }
+    ]
+  }
+}
+</script>

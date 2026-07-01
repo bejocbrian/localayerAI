@@ -1,0 +1,130 @@
+---
+---
+
+<div id="cookie-banner" class="cookie-banner">
+  <div class="cookie-banner-inner">
+    <div class="cookie-banner-text">
+      <p class="font-semibold text-white">We value your privacy</p>
+      <p class="text-sm text-slate-300">
+        We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+      </p>
+    </div>
+    <div class="cookie-banner-actions">
+      <button id="cookie-decline" class="cookie-btn cookie-btn-decline">Decline</button>
+      <button id="cookie-accept" class="cookie-btn cookie-btn-accept">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function() {
+    var KEY = 'cookie_consent';
+    var existing = localStorage.getItem(KEY);
+    if (existing) return;
+
+    var banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+
+    banner.classList.add('visible');
+
+    function grantConsent() {
+      localStorage.setItem(KEY, 'accepted');
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          'analytics_storage': 'granted',
+          'ad_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        });
+      }
+      banner.classList.remove('visible');
+    }
+
+    function denyConsent() {
+      localStorage.setItem(KEY, 'denied');
+      banner.classList.remove('visible');
+    }
+
+    document.getElementById('cookie-accept').addEventListener('click', grantConsent);
+    document.getElementById('cookie-decline').addEventListener('click', denyConsent);
+  })();
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 1rem;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .cookie-banner.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .cookie-banner-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  @media (min-width: 768px) {
+    .cookie-banner-inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .cookie-banner-text {
+    flex: 1;
+  }
+
+  .cookie-banner-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .cookie-btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+
+  .cookie-btn-accept {
+    background: #14b8a6;
+    color: white;
+  }
+
+  .cookie-btn-accept:hover {
+    background: #0d9488;
+  }
+
+  .cookie-btn-decline {
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid #475569;
+  }
+
+  .cookie-btn-decline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+  }
+</style>
