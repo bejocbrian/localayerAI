@@ -27,6 +27,10 @@ jobs:
         run: npm install
         working-directory: apps/web
 
+      - name: Install Linux native bindings
+        run: npm install @rolldown/binding-linux-x64-gnu
+        working-directory: apps/web
+
       - name: Build Astro site
         run: npm run build
         working-directory: apps/web
