@@ -23,17 +23,19 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: apps/web
+      - name: Clean and reinstall all dependencies
+        run: |
+          rm -rf node_modules apps/web/node_modules package-lock.json apps/web/package-lock.json
+          npm install
+          npm install --workspace=apps/web
 
-      - name: Install Linux native bindings
-        run: npm install @rolldown/binding-linux-x64-gnu
-        working-directory: apps/web
+      - name: Install platform-specific native bindings
+        run: |
+          npm install @rolldown/binding-linux-x64-gnu @astrojs/compiler-binding-linux-x64-gnu --workspace=apps/web
 
       - name: Build Astro site
-        run: npm run build
         working-directory: apps/web
+        run: npm run build
 
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
