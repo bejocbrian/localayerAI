@@ -9,6 +9,11 @@ on:
       - '.github/workflows/deploy-web.yml'
 
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force deploy'
+        required: false
+        default: 'true'
 
 jobs:
   build-and-deploy:
