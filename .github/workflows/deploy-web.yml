@@ -5,9 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'apps/web/**'
-      - '.github/workflows/deploy-web.yml'
-
+      - "apps/web/**"
+      - ".github/workflows/deploy-web.yml"
   workflow_dispatch:
 
 jobs:
@@ -22,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
 
       - name: Install dependencies
         run: npm install
@@ -32,9 +31,6 @@ jobs:
         run: npm run build
         working-directory: apps/web
 
-      - name: List build output
-        run: ls -la apps/web/dist/
-
       - name: Deploy to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -43,8 +39,3 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./apps/web/dist/
           server-dir: public_html
-          security: loose
-          exclude:
-            - .git*
-            - node_modules/**
-            - .env*
