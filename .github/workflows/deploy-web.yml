@@ -9,11 +9,6 @@ on:
       - '.github/workflows/deploy-web.yml'
 
   workflow_dispatch:
-    inputs:
-      force:
-        description: 'Force deploy'
-        required: false
-        default: 'true'
 
 jobs:
   build-and-deploy:
@@ -28,12 +23,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
 
-      - name: Install root dependencies
-        run: npm ci
-
-      - name: Install web dependencies
+      - name: Install dependencies
         run: npm install
         working-directory: apps/web
 
@@ -51,7 +42,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./apps/web/dist/
-          server-dir: /public_html/
+          server-dir: public_html
           security: loose
           exclude:
             - .git*
