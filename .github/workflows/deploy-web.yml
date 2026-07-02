@@ -40,11 +40,13 @@ jobs:
       - name: Verify build output
         run: ls -la apps/web/dist/
 
-      - name: Deploy to Hostinger via FTP
+      - name: Deploy to Hostinger via SFTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: sftp
+          port: 65002
           local-dir: ${{ github.workspace }}/apps/web/dist/
           server-dir: public_html/
