@@ -6,7 +6,7 @@
   },
   "deploy": {
     "startCommand": "/pb/pocketbase serve --http=0.0.0.0:8090",
-    "healthcheckPath": "/_/",
+    "healthcheckPath": "/api/health",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 5
