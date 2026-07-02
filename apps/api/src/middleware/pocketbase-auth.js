@@ -16,7 +16,7 @@ export async function pocketbaseAuth(req, res, next) {
 			return next();
 		}
 		// by refreshing token we verify that it was not intercepted by a malicious user
-		const pocketbaseClient = new Pocketbase('http://localhost:8090');
+		const pocketbaseClient = new Pocketbase(process.env.POCKETBASE_URL || 'http://localhost:8090');
 		pocketbaseClient.authStore.save(tokenData.token, tokenData.record);
 		const newToken = await pocketbaseClient.collection(tokenData.record.collectionName).authRefresh();
 
