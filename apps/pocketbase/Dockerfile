@@ -10,6 +10,10 @@ RUN apk add --no-cache \
     && chmod +x /pb/pocketbase \
     && rm /tmp/pb.zip
 
+RUN mkdir -p /pb/pb_data /pb/pb_hooks && chmod -R 777 /pb
+
+WORKDIR /pb
+
 EXPOSE 8090
 
 CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8090"]
