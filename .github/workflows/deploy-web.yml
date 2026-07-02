@@ -48,4 +48,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 65002
           local_path: ./apps/web/dist/*
-          remote_path: /public_html/
+          remote_path: public_html/
